@@ -1624,7 +1624,8 @@ function _doSave(){
     piecesFile:S.piecesFile||null,
     piecesXL:S.piecesXL||false,
     _lastUpdate:new Date().toISOString(),
-    _updatedBy:S.curUser||'system'
+    _updatedBy:S.curUser||'system',
+    _version:APP_VERSION
   };
   if(fbReady&&fbDB){
     showSync('saving');
@@ -1653,10 +1654,13 @@ function loadState(){
   }catch(e){}
 }
 
+const APP_VERSION='2.0';
 function _applyState(d){
   if(!d)return;
   if(d.DB&&d.DB.length)S.DB=d.DB;
-  if(d.admins&&d.admins.length)S.admins=d.admins;
+  // Force new admins if old version (no version or different version)
+  if(d._version===APP_VERSION&&d.admins&&d.admins.length)S.admins=d.admins;
+  else console.log('⬆ Upgrade: admins reset to defaults');
   if(d.fournisseurs&&d.fournisseurs.length)S.fournisseurs=d.fournisseurs;
   if(d.injectedFiles)S.injectedFiles=d.injectedFiles;
   if(d.masterFile)S.masterFile=d.masterFile;
@@ -1720,7 +1724,15 @@ function defDB(){return [{"grp": "8032", "conn": "", "term": "P00391303", "conta
   const loader=document.getElementById('fb-loading');
   const fbMsg=document.getElementById('fb-msg');
 
-  // 1) Load from localStorage first (instant)
+  // 1) Clear old version data if needed
+  try{
+    const oldData=JSON.parse(localStorage.getItem('crimping_pro_leoni')||'{}');
+    if(!oldData._version||oldData._version!==APP_VERSION){
+      console.log('⬆ Version upgrade detected — resetting auth data');
+      localStorage.removeItem('crimping_pro_leoni');
+    }
+  }catch(e){}
+  // Load from localStorage (instant)
   loadState();
 
   // 2) Try Firebase (async)
