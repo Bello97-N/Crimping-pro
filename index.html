@@ -247,6 +247,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--fon
   padding:1px 6px;border-radius:9px;
 }
 .adm-only{display:none}
+.super-only{display:none}
 .sb-foot{margin-top:auto;padding:12px 14px;border-top:1px solid var(--bd)}
 /* MINI KPI sidebar */
 .sb-kpis{display:grid;grid-template-columns:1fr 1fr;gap:7px}
@@ -590,6 +591,7 @@ tr.sel .fix-col{background:#eef2ff!important}
 }
 .br-super{background:var(--orange-bg);color:var(--orange)}
 .br-admin{background:var(--blue-bg);color:var(--blue)}
+.br-visitor{background:var(--green-bg);color:var(--green)}
 
 /* A4 */
 .a4p{width:794px;min-height:1123px;background:#fff;box-shadow:0 8px 32px rgba(0,0,0,.12);position:relative;font-family:sans-serif;color:#1a2535;flex-shrink:0;transform-origin:top center}
@@ -785,7 +787,7 @@ tr.sel .fix-col{background:#eef2ff!important}
       <span class="tb-uname" id="uname">—</span>
       <span class="tb-badge" id="ubadge"></span>
     </div>
-    <button class="tb-logout" id="logout-btn" onclick="doLogout()" style="display:none">↩ Déconnecter</button>
+    <button class="tb-logout" id="settings-btn" onclick="navTo('g')" style="display:none">⚙</button> <button class="tb-logout" id="logout-btn" onclick="doLogout()" style="display:none">↩ Déconnecter</button>
   </div>
 </div>
 
@@ -798,23 +800,18 @@ tr.sel .fix-col{background:#eef2ff!important}
       <div class="lg-ico">⚙</div>
       <div class="lg-title">CRIMPING PRO</div>
       <div class="lg-sub">Gestion des outils de sertissage</div>
-      <div class="lg-company">Leoni Wiring Systems — Annex 5</div>
+      <div class="lg-company">Leoni Wiring Systems — Maintenance Sertissage</div>
     </div>
-    <div class="lg-err" id="lg-err">⚠ Code incorrect.</div>
-    <!-- CODE D'ACCÈS UNIQUE (lecture seule) -->
-    <div id="login-code-zone">
-      <div class="fg"><label class="fl">🔑 Code d'accès partagé</label><input class="code-input" id="icode" type="password" placeholder="••••••" maxlength="10" onkeydown="if(event.key==='Enter')doCodeLogin()" autocomplete="off"></div>
-      <button class="btn-login" onclick="doCodeLogin()">Accéder aux données</button>
-      <div class="lg-divider"><span>ou connexion admin</span></div>
+    <div class="lg-err" id="lg-err">⚠ Identifiants incorrects.</div>
+    <div class="fg"><label class="fl">👤 Nom d'utilisateur</label><input class="fi" id="iu" placeholder="Votre identifiant" autocomplete="off"></div>
+    <div class="fg"><label class="fl">🔒 Mot de passe</label><input class="fi" id="ip" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <button class="btn-login" onclick="doLogin()">Se connecter</button>
+    <div style="margin-top:14px;padding:12px;background:var(--surf2);border:1px solid var(--bd);border-radius:var(--r);font-size:.72rem;color:var(--t3);text-align:center">
+      <strong style="color:var(--t2)">Comptes disponibles</strong><br>
+      <span style="font-family:monospace">bilal</span> (Super Admin) · 
+      <span style="font-family:monospace">said · loukrimi · oumjoud · dahbi</span> (Admins) · 
+      <span style="font-family:monospace">crimp</span> (Visiteur)
     </div>
-    <!-- ADMIN LOGIN -->
-    <div id="login-admin-zone" style="display:none">
-      <div class="fg"><label class="fl">Nom d'utilisateur</label><input class="fi" id="iu" placeholder="ex : nahil" autocomplete="off"></div>
-      <div class="fg"><label class="fl">Mot de passe</label><input class="fi" id="ip" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
-      <button class="btn-login" onclick="doLogin()">Connexion Admin</button>
-      <button class="btn-ro" onclick="showCodeLogin()" style="margin-top:6px;width:100%;height:30px;background:none;border:1px solid var(--bd);border-radius:var(--r);color:var(--t2);font-family:var(--font);font-size:.78rem;cursor:pointer">← Retour code d'accès</button>
-    </div>
-    <button class="btn-ro" id="btn-show-admin" onclick="showAdminLogin()">Connexion administrateur →</button>
   </div>
 </div>
 
@@ -835,7 +832,8 @@ tr.sel .fix-col{background:#eef2ff!important}
         <div class="ni adm-only" id="sdn-s" onclick="navTo('s')"><span class="ico">🏢</span>Fournisseurs</div>
         <div class="ni" id="sdn-r" onclick="navTo('r')"><span class="ico">🔩</span>Pièces &amp; Stock</div>
         <div class="ni" id="sdn-p" onclick="navTo('p')"><span class="ico">📂</span>Répartition Projets</div>
-        <div class="ni adm-only" id="sdn-m" onclick="navTo('m')"><span class="ico">👤</span>Admins</div>
+        <div class="ni" id="sdn-g" onclick="navTo('g')"><span class="ico">⚙</span>Paramètres</div>
+        <div class="ni super-only" id="sdn-m" onclick="navTo('m')"><span class="ico">👤</span>Utilisateurs</div>
       </div>
       <div class="sb-foot">
         <div class="sb-lbl" style="padding:0;margin-bottom:7px">KPIs</div>
@@ -931,7 +929,8 @@ tr.sel .fix-col{background:#eef2ff!important}
         <div class="ni adm-only" id="san-s" onclick="navTo('s')"><span class="ico">🏢</span>Fournisseurs</div>
         <div class="ni" id="san-r" onclick="navTo('r')"><span class="ico">🔩</span>Pièces &amp; Stock</div>
         <div class="ni" id="san-p" onclick="navTo('p')"><span class="ico">📂</span>Répartition Projets</div>
-        <div class="ni adm-only" id="san-m" onclick="navTo('m')"><span class="ico">👤</span>Admins</div>
+        <div class="ni" id="san-g" onclick="navTo('g')"><span class="ico">⚙</span>Paramètres</div>
+        <div class="ni super-only" id="san-m" onclick="navTo('m')"><span class="ico">👤</span>Utilisateurs</div>
       </div>
       <div class="sb-sec">
         <div class="sb-lbl">Actions</div>
@@ -1034,7 +1033,8 @@ tr.sel .fix-col{background:#eef2ff!important}
         <div class="ni adm-only" id="stn-s" onclick="navTo('s')"><span class="ico">🏢</span>Fournisseurs</div>
         <div class="ni" id="stn-r" onclick="navTo('r')"><span class="ico">🔩</span>Pièces &amp; Stock</div>
         <div class="ni" id="stn-p" onclick="navTo('p')"><span class="ico">📂</span>Répartition Projets</div>
-        <div class="ni adm-only" id="stn-m" onclick="navTo('m')"><span class="ico">👤</span>Admins</div>
+        <div class="ni" id="stn-g" onclick="navTo('g')"><span class="ico">⚙</span>Paramètres</div>
+        <div class="ni super-only" id="stn-m" onclick="navTo('m')"><span class="ico">👤</span>Utilisateurs</div>
       </div>
       <div class="sb-foot" style="font-size:.69rem;color:var(--t3)"><strong style="color:var(--leoni-blue)">Format A4</strong> — 794×1123px<br><span style="color:var(--orange)">Forme verrouillée</span><br>Seules les références sont modifiables</div>
     </div>
@@ -1122,7 +1122,8 @@ tr.sel .fix-col{background:#eef2ff!important}
         <div class="ni adm-only" id="sfn-s" onclick="navTo('s')"><span class="ico">🏢</span>Fournisseurs</div>
         <div class="ni" id="sfn-r" onclick="navTo('r')"><span class="ico">🔩</span>Pièces &amp; Stock</div>
         <div class="ni" id="sfn-p" onclick="navTo('p')"><span class="ico">📂</span>Répartition Projets</div>
-        <div class="ni adm-only" id="sfn-m" onclick="navTo('m')"><span class="ico">👤</span>Admins</div>
+        <div class="ni" id="sfn-g" onclick="navTo('g')"><span class="ico">⚙</span>Paramètres</div>
+        <div class="ni super-only" id="sfn-m" onclick="navTo('m')"><span class="ico">👤</span>Utilisateurs</div>
       </div>
     </div>
     <div class="cnt">
@@ -1158,7 +1159,8 @@ tr.sel .fix-col{background:#eef2ff!important}
         <div class="ni on" id="ssn-s" onclick="navTo('s')"><span class="ico">🏢</span>Fournisseurs</div>
         <div class="ni" id="ssn-r" onclick="navTo('r')"><span class="ico">🔩</span>Pièces &amp; Stock</div>
         <div class="ni" id="ssn-p" onclick="navTo('p')"><span class="ico">📂</span>Répartition Projets</div>
-        <div class="ni adm-only" id="ssn-m" onclick="navTo('m')"><span class="ico">👤</span>Admins</div>
+        <div class="ni" id="ssn-g" onclick="navTo('g')"><span class="ico">⚙</span>Paramètres</div>
+        <div class="ni super-only" id="ssn-m" onclick="navTo('m')"><span class="ico">👤</span>Utilisateurs</div>
       </div>
     </div>
     <div class="cnt">
@@ -1186,7 +1188,7 @@ tr.sel .fix-col{background:#eef2ff!important}
   </div>
 </div>
 
-<!-- ═════ ADMINS ═════ -->
+<!-- ═════ GESTION UTILISATEURS (Super Admin: Bilal) ═════ -->
 <div class="scr" id="sm">
   <div class="lay">
     <div class="sidebar">
@@ -1200,29 +1202,47 @@ tr.sel .fix-col{background:#eef2ff!important}
         <div class="ni adm-only" id="smn-s" onclick="navTo('s')"><span class="ico">🏢</span>Fournisseurs</div>
         <div class="ni" id="smn-r" onclick="navTo('r')"><span class="ico">🔩</span>Pièces &amp; Stock</div>
         <div class="ni" id="smn-p" onclick="navTo('p')"><span class="ico">📂</span>Répartition Projets</div>
-        <div class="ni on" id="smn-m" onclick="navTo('m')"><span class="ico">👤</span>Admins</div>
+        <div class="ni" id="smn-g" onclick="navTo('g')"><span class="ico">⚙</span>Paramètres</div>
+        <div class="ni on super-only" id="smn-m" onclick="navTo('m')"><span class="ico">👤</span>Utilisateurs</div>
       </div>
     </div>
     <div class="cnt">
-      <div class="ch"><span class="ct">Gestion des Administrateurs</span><span class="cs">— Ajouter · Supprimer</span></div>
+      <div class="ch"><span class="ct">Gestion des Utilisateurs</span><span class="cs">— Master Panel · Bilal (Super Admin)</span></div>
       <div class="cb">
+        <!-- Master User List with passwords -->
         <div class="sec">
-          <div class="sec-title"><div class="sec-ico sio">👤</div>Administrateurs actifs</div>
+          <div class="sec-title"><div class="sec-ico sio">🔑</div>Tous les comptes — Vue Super Admin</div>
           <div id="admin-list-ui"></div>
-          <div style="margin-top:14px;display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
+        </div>
+        <!-- Add user -->
+        <div class="sec">
+          <div class="sec-title"><div class="sec-ico sig">➕</div>Ajouter un utilisateur</div>
+          <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
             <div class="ffg" style="flex:1;min-width:130px"><label class="ffl">Nom d'utilisateur</label><input class="ffi" id="new-au" placeholder="ex : alice" style="width:100%"></div>
-            <div class="ffg" style="flex:1;min-width:130px"><label class="ffl">Mot de passe</label><input class="ffi" id="new-ap" type="password" placeholder="••••••" style="width:100%"></div>
+            <div class="ffg" style="flex:1;min-width:130px"><label class="ffl">Mot de passe</label><input class="ffi" id="new-ap" placeholder="••••••" style="width:100%"></div>
             <div class="ffg"><label class="ffl">Rôle</label>
               <select class="ffi" id="new-ar" style="min-width:130px;-webkit-appearance:none">
-                <option value="superadmin">Super Admin</option><option value="admin" selected>Admin</option>
+                <option value="admin" selected>Admin</option>
+                <option value="visitor">Visiteur (lecture seule)</option>
+                <option value="superadmin">Super Admin</option>
               </select>
             </div>
             <button class="btn btn-p" onclick="addAdmin()" style="height:36px">+ Ajouter</button>
           </div>
         </div>
+        <!-- Reset password dialog -->
+        <div class="sec" id="reset-pw-zone" style="display:none">
+          <div class="sec-title"><div class="sec-ico" style="background:var(--orange-bg)">🔐</div><span id="reset-pw-title">Réinitialiser mot de passe</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
+            <div class="ffg" style="flex:1"><label class="ffl">Nouveau mot de passe</label><input class="ffi" id="reset-pw-input" placeholder="Nouveau mot de passe" style="width:100%"></div>
+            <button class="btn btn-p" onclick="confirmResetPw()" style="height:36px">✓ Confirmer</button>
+            <button class="btn" onclick="cancelResetPw()" style="height:36px">✕ Annuler</button>
+          </div>
+        </div>
+        <!-- Security note -->
         <div class="sec">
-          <div class="sec-title"><div class="sec-ico sib">🔐</div>Note de sécurité</div>
-          <p style="font-size:.82rem;color:var(--t2);line-height:1.7">En production, utilisez <strong>Azure Active Directory (AAD)</strong> ou <strong>Azure Key Vault</strong>. Le compte <code style="background:var(--surf2);padding:1px 6px;border-radius:4px;font-family:monospace;font-size:.78rem">nahil</code> est protégé et ne peut pas être supprimé. Les mots de passe sont stockés dans <code style="background:var(--surf2);padding:1px 6px;border-radius:4px;font-family:monospace;font-size:.78rem">localStorage</code> pour cette simulation.</p>
+          <div class="sec-title"><div class="sec-ico sib">🔐</div>Sécurité</div>
+          <p style="font-size:.82rem;color:var(--t2);line-height:1.7">Le compte <code style="background:var(--surf2);padding:1px 6px;border-radius:4px;font-family:monospace;font-size:.78rem">bilal</code> (Super Admin) ne peut pas être supprimé. Les mots de passe sont synchronisés via <strong>Firebase Realtime Database</strong>. Chaque utilisateur peut modifier son propre mot de passe via <strong>⚙ Paramètres</strong>.</p>
         </div>
       </div>
     </div>
@@ -1244,7 +1264,8 @@ tr.sel .fix-col{background:#eef2ff!important}
         <div class="ni adm-only" id="pn-s" onclick="navTo('s')"><span class="ico">🏢</span>Fournisseurs</div>
         <div class="ni" id="pn-r" onclick="navTo('r')"><span class="ico">🔩</span>Pièces &amp; Stock</div>
         <div class="ni on" id="pn-p" onclick="navTo('p')"><span class="ico">📂</span>Répartition Projets</div>
-        <div class="ni adm-only" id="pn-m" onclick="navTo('m')"><span class="ico">👤</span>Admins</div>
+        <div class="ni" id="pn-g" onclick="navTo('g')"><span class="ico">⚙</span>Paramètres</div>
+        <div class="ni super-only" id="pn-m" onclick="navTo('m')"><span class="ico">👤</span>Utilisateurs</div>
       </div>
       <div class="sb-foot">
         <div class="sb-lbl" style="padding:0;margin-bottom:7px">Projets</div>
@@ -1322,7 +1343,8 @@ tr.sel .fix-col{background:#eef2ff!important}
         <div class="ni adm-only" id="rn-s" onclick="navTo('s')"><span class="ico">🏢</span>Fournisseurs</div>
         <div class="ni on" id="rn-r" onclick="navTo('r')"><span class="ico">🔩</span>Pièces &amp; Stock</div>
         <div class="ni" id="rn-p" onclick="navTo('p')"><span class="ico">📂</span>Répartition Projets</div>
-        <div class="ni adm-only" id="rn-m" onclick="navTo('m')"><span class="ico">👤</span>Admins</div>
+        <div class="ni" id="rn-g" onclick="navTo('g')"><span class="ico">⚙</span>Paramètres</div>
+        <div class="ni super-only" id="rn-m" onclick="navTo('m')"><span class="ico">👤</span>Utilisateurs</div>
       </div>
       <div class="sb-foot">
         <div class="sb-lbl" style="padding:0;margin-bottom:7px">Stock</div>
@@ -1468,6 +1490,55 @@ tr.sel .fix-col{background:#eef2ff!important}
   </div>
 </div>
 
+
+<!-- ═════ PARAMÈTRES / PROFIL ═════ -->
+<div class="scr" id="sg">
+  <div class="lay">
+    <div class="sidebar">
+      <div class="sb-logo-zone"><div class="sb-logo-dot"></div><div class="sb-logo-name">Crimping Pro</div></div>
+      <div class="sb-sec">
+        <div class="sb-lbl">Navigation</div>
+        <div class="ni" id="gn-d" onclick="navTo('d')"><span class="ico">📊</span>Dashboard</div>
+        <div class="ni adm-only" id="gn-a" onclick="navTo('a')"><span class="ico">🗄</span>Base de données</div>
+        <div class="ni" id="gn-r" onclick="navTo('r')"><span class="ico">🔩</span>Pièces &amp; Stock</div>
+        <div class="ni" id="gn-p" onclick="navTo('p')"><span class="ico">📂</span>Répartition Projets</div>
+        <div class="ni on" id="gn-g" onclick="navTo('g')"><span class="ico">⚙</span>Paramètres</div>
+      </div>
+    </div>
+    <div class="cnt">
+      <div class="ch"><span class="ct">⚙ Mon Profil</span><span class="cs" id="profile-sub">— Paramètres du compte</span></div>
+      <div class="cb">
+        <!-- User info -->
+        <div class="sec">
+          <div class="sec-title"><div class="sec-ico sib">👤</div>Informations du compte</div>
+          <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+            <div id="profile-avatar" style="width:60px;height:60px;border-radius:50%;background:var(--leoni-light);border:2px solid var(--leoni-blue);display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;color:var(--leoni-blue)">?</div>
+            <div>
+              <div style="font-size:1.1rem;font-weight:700;color:var(--tx)" id="profile-name">—</div>
+              <div style="font-size:.82rem;color:var(--t2);margin-top:2px" id="profile-role">—</div>
+              <div style="font-size:.72rem;color:var(--t3);margin-top:4px" id="profile-access">—</div>
+            </div>
+          </div>
+        </div>
+        <!-- Change password -->
+        <div class="sec">
+          <div class="sec-title"><div class="sec-ico" style="background:var(--orange-bg)">🔒</div>Changer mon mot de passe</div>
+          <div class="lg-err" id="pw-err" style="display:none;margin-bottom:12px">⚠ Erreur</div>
+          <div style="display:none;background:var(--green-bg);border:1px solid #6ee7b7;border-radius:var(--r);padding:9px 13px;font-size:.8rem;color:var(--green);margin-bottom:12px;align-items:center;gap:7px" id="pw-ok">✓ Mot de passe modifié avec succès !</div>
+          <div class="fg2">
+            <div class="ffg"><label class="ffl req">Mot de passe actuel</label><input class="ffi" id="pw-current" type="password" placeholder="••••••••" style="width:100%"></div>
+            <div class="ffg"><label class="ffl req">Nouveau mot de passe</label><input class="ffi" id="pw-new" type="password" placeholder="Minimum 4 caractères" style="width:100%"></div>
+            <div class="ffg"><label class="ffl req">Confirmer nouveau</label><input class="ffi" id="pw-confirm" type="password" placeholder="Confirmer" style="width:100%" onkeydown="if(event.key==='Enter')changeMyPassword()"></div>
+          </div>
+          <div class="ffa" style="margin-top:12px">
+            <button class="btn btn-p" onclick="changeMyPassword()">🔒 Mettre à jour le mot de passe</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div><!-- /#screens -->
 
 <!-- DIALOG -->
@@ -1509,7 +1580,6 @@ const FIREBASE_CONFIG = {
 };
 
 /* Code d'accès unique partagé (modifiable ici ou dans Firebase /config/accessCode) */
-let ACCESS_CODE = "LEONI2024";
 
 let fbApp=null,fbDB=null,fbReady=false;
 let _saveTimer=null;
@@ -1599,10 +1669,6 @@ function _applyState(d){
 async function loadFromFirebase(){
   if(!fbReady||!fbDB)return false;
   try{
-    // Load access code from Firebase if set
-    const codeSnap=await fbDB.ref('config/accessCode').once('value');
-    if(codeSnap.exists())ACCESS_CODE=codeSnap.val();
-
     const snap=await fbDB.ref('crimpingPro').once('value');
     if(snap.exists()){
       const d=snap.val();
@@ -1642,8 +1708,8 @@ function startRealtimeSync(){
   });
 }
 
-let S={isAdmin:false,curUser:'',selIdx:null,editIdx:null,curTpl:null,tplRows:[],tplRowIdx:0,dashData:[],dashXL:false,
-  admins:[{user:'nahil',pass:'10541',role:'superadmin'}],
+let S={isAdmin:false,curUser:'',curRole:'',selIdx:null,editIdx:null,curTpl:null,tplRows:[],tplRowIdx:0,dashData:[],dashXL:false,
+  admins:[{user:'bilal',pass:'admin2024',role:'superadmin'},{user:'said',pass:'said123',role:'admin'},{user:'loukrimi',pass:'louk123',role:'admin'},{user:'oumjoud',pass:'oumj123',role:'admin'},{user:'dahbi',pass:'dahbi123',role:'admin'},{user:'crimp',pass:'1230',role:'visitor'}],
   fournisseurs:[{name:'THB',cls:'tbl'},{name:'JST',cls:'tgo'},{name:'AMP',cls:'trd'},{name:'MOLEX',cls:'tbl'},{name:'YAZAKI',cls:'tgo'},{name:'SUMITOMO',cls:'trd'}],
   DB:[],injectedFiles:[],masterFile:null,pieces:[],piecesFile:null,piecesXL:false};
 
@@ -1719,46 +1785,35 @@ function getViewData(){
   });
 }
 
-function doCodeLogin(){
-  const code=document.getElementById('icode').value.trim();
-  const err=document.getElementById('lg-err');
-  if(!code){err.textContent='⚠ Entrez le code d\'accès.';err.classList.add('on');return;}
-  if(code===ACCESS_CODE){
-    err.classList.remove('on');
-    S.isAdmin=false;S.curUser='Utilisateur';
-    setUser('Utilisateur','Lecture seule','read');
-    applyROFilter();
-    navTo('d');
-    toast('Bienvenue — Outils intégrés sur CAO','s');
-    document.getElementById('icode').value='';
-  }else{
-    err.textContent='⚠ Code d\'accès incorrect.';err.classList.add('on');
-    document.getElementById('icode').value='';document.getElementById('icode').focus();
-  }
-}
-function showAdminLogin(){
-  document.getElementById('login-code-zone').style.display='none';
-  document.getElementById('login-admin-zone').style.display='block';
-  document.getElementById('btn-show-admin').style.display='none';
-  document.getElementById('lg-err').classList.remove('on');
-}
-function showCodeLogin(){
-  document.getElementById('login-code-zone').style.display='block';
-  document.getElementById('login-admin-zone').style.display='none';
-  document.getElementById('btn-show-admin').style.display='block';
-  document.getElementById('lg-err').classList.remove('on');
-}
 function doLogin(){
   const u=document.getElementById('iu').value.trim().toLowerCase(),p=document.getElementById('ip').value;
   const err=document.getElementById('lg-err');
   if(!u||!p){err.textContent='⚠ Remplissez tous les champs.';err.classList.add('on');return;}
   const adm=S.admins.find(a=>a.user.toLowerCase()===u&&a.pass===p);
-  if(adm){err.classList.remove('on');S.isAdmin=true;S.curUser=adm.user;setUser(adm.user,adm.role==='superadmin'?'Super Admin':'Admin','admin');enableAdmin();navTo('d');toast('Bienvenue '+adm.user+' — Mode '+adm.role,'s');}
-  else{err.textContent='⚠ Identifiants incorrects.';err.classList.add('on');document.getElementById('ip').value='';document.getElementById('ip').focus();}
+  if(!adm){err.textContent='⚠ Identifiants incorrects.';err.classList.add('on');document.getElementById('ip').value='';document.getElementById('ip').focus();return;}
+  err.classList.remove('on');
+  S.curUser=adm.user;S.curRole=adm.role;
+
+  if(adm.role==='visitor'){
+    // Visitor — read only, CAO filter
+    S.isAdmin=false;
+    setUser(adm.user,'Visiteur','read');
+    applyROFilter();
+    navTo('d');
+    toast('Bienvenue '+adm.user+' — Lecture seule (CAO)','s');
+  }else{
+    // Admin or Super Admin — full access
+    S.isAdmin=true;
+    const roleLabel=adm.role==='superadmin'?'Super Admin':'Admin';
+    setUser(adm.user,roleLabel,'admin');
+    enableAdmin();
+    navTo('d');
+    toast('Bienvenue '+adm.user+' — '+roleLabel,'s');
+  }
 }
-function goRO(){S.isAdmin=false;S.curUser='Invité';setUser('Invité','Lecture seule','read');applyROFilter();navTo('d');toast('Outils intégrés sur CAO','i');}
-function doLogout(){S.isAdmin=false;S.curUser='';disableAdmin();['uinfo','logout-btn'].forEach(id=>document.getElementById(id).style.display='none');['iu','ip'].forEach(id=>document.getElementById(id).value='');document.getElementById('icode').value='';document.getElementById('lg-err').classList.remove('on');showCodeLogin();document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));document.getElementById('sl').classList.add('on');document.getElementById('scr-lbl').textContent='SCREEN_LOGIN';}
-function setUser(n,r,t){['uinfo','logout-btn'].forEach(id=>document.getElementById(id).style.display='flex');document.getElementById('uname').textContent=n;document.getElementById('uav').textContent=n[0].toUpperCase();const b=document.getElementById('ubadge');b.textContent=r;b.className='tb-badge '+(t==='admin'?'b-admin':'b-read');}
+function goRO(){S.isAdmin=false;S.curUser='Invité';S.curRole='visitor';setUser('Invité','Lecture seule','read');applyROFilter();navTo('d');toast('Outils intégrés sur CAO','i');}
+function doLogout(){S.isAdmin=false;S.curUser='';S.curRole='';disableAdmin();['uinfo','logout-btn','settings-btn'].forEach(id=>document.getElementById(id).style.display='none');['iu','ip'].forEach(id=>document.getElementById(id).value='');document.getElementById('lg-err').classList.remove('on');document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));document.getElementById('sl').classList.add('on');document.getElementById('scr-lbl').textContent='SCREEN_LOGIN';}
+function setUser(n,r,t){['uinfo','logout-btn','settings-btn'].forEach(id=>document.getElementById(id).style.display='flex');document.getElementById('uname').textContent=n;document.getElementById('uav').textContent=n[0].toUpperCase();const b=document.getElementById('ubadge');b.textContent=r;b.className='tb-badge '+(t==='admin'?'b-admin':'b-read');}
 function applyROFilter(){
   const filtered=getViewData();
   const total=S.dashData.length?S.dashData.length:S.DB.length;
@@ -1772,22 +1827,24 @@ function applyROFilter(){
 }
 function enableAdmin(){
   document.querySelectorAll('.adm-only').forEach(e=>e.style.display='flex');
+  if(S.curRole==='superadmin')document.querySelectorAll('.super-only').forEach(e=>e.style.display='flex');
   // Admin: show ALL data, remove RO filter
   const allData=S.dashData.length?S.dashData:[...S.DB];
   buildDashHeader();renderDash(allData);renderAdmin(S.DB);updateKPI(allData);
   document.getElementById('dash-lbl').textContent='— Toutes les données · '+allData.length+' outils';
   document.getElementById('inj-bar').classList.remove('on');
 }
-function disableAdmin(){document.querySelectorAll('.adm-only').forEach(e=>e.style.display='none');applyROFilter();}
+function disableAdmin(){document.querySelectorAll('.adm-only').forEach(e=>e.style.display='none');document.querySelectorAll('.super-only').forEach(e=>e.style.display='none');applyROFilter();}
 
-const SM={d:'sd',a:'sa',t:'st',f:'sf',s:'ss',m:'sm',p:'sp',r:'sr'},LM={d:'DASHBOARD',a:'BASE DE DONNÉES',t:'TEMPLATES A4',f:'FICHIERS',s:'FOURNISSEURS',m:'ADMINS',p:'RÉPARTITION PROJETS',r:'PIÈCES & STOCK'};
+const SM={d:'sd',a:'sa',t:'st',f:'sf',s:'ss',m:'sm',p:'sp',r:'sr',g:'sg'},LM={d:'DASHBOARD',a:'BASE DE DONNÉES',t:'TEMPLATES A4',f:'FICHIERS',s:'FOURNISSEURS',m:'UTILISATEURS',p:'RÉPARTITION PROJETS',r:'PIÈCES & STOCK',g:'PARAMÈTRES'};
 function navTo(id){
-  if(!S.isAdmin&&id!=='d'&&id!=='p'&&id!=='r'){toast('Connexion admin requise','e');return;}
+  if(!S.isAdmin&&id!=='d'&&id!=='p'&&id!=='r'&&id!=='g'){toast('Connexion admin requise','e');return;}
+  if(id==='m'&&S.curRole!=='superadmin'){toast('Réservé au Super Admin (Bilal)','e');return;}
   document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
   document.getElementById(SM[id]).classList.add('on');
   document.getElementById('scr-lbl').textContent=LM[id];
   document.querySelectorAll('.ni[id]').forEach(ni=>ni.classList.toggle('on',ni.id.split('-').pop()===id));
-  if(id==='f')renderFiles();if(id==='s')buildFourList();if(id==='m')buildAdminList();if(id==='p')buildProjects();if(id==='r')buildPieces();
+  if(id==='f')renderFiles();if(id==='s')buildFourList();if(id==='m')buildAdminList();if(id==='p')buildProjects();if(id==='r')buildPieces();if(id==='g')buildProfile();
 }
 
 function buildDashHeader(){
@@ -1934,17 +1991,27 @@ function populateFourSel(){const sel=document.getElementById('fi-four');if(!sel)
 
 function buildAdminList(){
   const c=document.getElementById('admin-list-ui');if(!c)return;c.innerHTML='';
+  const isSuperAdmin=S.curRole==='superadmin';
   S.admins.forEach((a,i)=>{
     const d=document.createElement('div');d.className='admin-row';
-    const col=a.role==='superadmin'?'#fff7ed':'#eff6ff';const txtcol=a.role==='superadmin'?'#c2410c':'#1d4ed8';
-    d.innerHTML=`<div class="admin-av" style="background:${col};color:${txtcol}">${a.user[0].toUpperCase()}</div>
-    <div class="admin-info"><div class="admin-name">${a.user}<span class="badge-role ${a.role==='superadmin'?'br-super':'br-admin'}">${a.role==='superadmin'?'Super Admin':'Admin'}</span></div><div class="admin-role">Mot de passe : ${'•'.repeat(a.pass.length)} · Dernière connexion : —</div></div>
-    <div class="file-acts">${a.user!=='nahil'?`<button class="btn btn-d btn-sm" onclick="delAdmin(${i})">Supprimer</button>`:'<span style="font-size:.7rem;color:var(--t3);padding:4px 8px;background:var(--surf2);border-radius:4px">Compte principal</span>'}</div>`;
+    const roleMap={superadmin:{col:'#fff7ed',txt:'#c2410c',label:'Super Admin',cls:'br-super'},admin:{col:'#eff6ff',txt:'#1d4ed8',label:'Admin',cls:'br-admin'},visitor:{col:'#f0fdf4',txt:'#059669',label:'Visiteur',cls:'br-visitor'}};
+    const rm=roleMap[a.role]||roleMap.admin;
+    // Show password only to super admin
+    const pwDisplay=isSuperAdmin?`<span style="font-family:monospace;background:var(--surf2);padding:2px 8px;border-radius:4px;font-size:.78rem;color:var(--tx);border:1px solid var(--bd)">${a.pass}</span>`:`${'•'.repeat(a.pass.length)}`;
+    const actions=[];
+    if(isSuperAdmin&&a.user!=='bilal'){
+      actions.push(`<button class="btn btn-o btn-sm" onclick="openResetPw(${i})">🔑 Reset MDP</button>`);
+      actions.push(`<button class="btn btn-d btn-sm" onclick="delAdmin(${i})">Supprimer</button>`);
+    }
+    if(a.user==='bilal')actions.push('<span style="font-size:.7rem;color:var(--t3);padding:4px 8px;background:var(--surf2);border-radius:4px">Compte principal</span>');
+    d.innerHTML=`<div class="admin-av" style="background:${rm.col};color:${rm.txt}">${a.user[0].toUpperCase()}</div>
+    <div class="admin-info"><div class="admin-name">${a.user}<span class="badge-role ${rm.cls}">${rm.label}</span></div><div class="admin-role">Mot de passe : ${pwDisplay}</div></div>
+    <div class="file-acts">${actions.join(' ')}</div>`;
     c.appendChild(d);
   });
 }
-function addAdmin(){const u=document.getElementById('new-au').value.trim().toLowerCase(),p=document.getElementById('new-ap').value,r=document.getElementById('new-ar').value;if(!u||!p){toast('Remplissez tous les champs','w');return;}if(S.admins.find(a=>a.user===u)){toast(u+' existe déjà','w');return;}S.admins.push({user:u,pass:p,role:r});saveState();buildAdminList();document.getElementById('new-au').value='';document.getElementById('new-ap').value='';toast('Admin '+u+' ajouté','s');}
-function delAdmin(i){const a=S.admins[i];if(a.user==='nahil'){toast('Impossible de supprimer le compte principal','e');return;}showDlg('Supprimer admin',`Supprimer l'admin <strong>${a.user}</strong> ?`,()=>{S.admins.splice(i,1);saveState();buildAdminList();toast('Admin supprimé','w');});}
+function addAdmin(){if(S.curRole!=='superadmin'){toast('Réservé au Super Admin','e');return;}const u=document.getElementById('new-au').value.trim().toLowerCase(),p=document.getElementById('new-ap').value,r=document.getElementById('new-ar').value;if(!u||!p){toast('Remplissez tous les champs','w');return;}if(S.admins.find(a=>a.user===u)){toast(u+' existe déjà','w');return;}S.admins.push({user:u,pass:p,role:r});saveState();buildAdminList();document.getElementById('new-au').value='';document.getElementById('new-ap').value='';toast('Utilisateur '+u+' ajouté','s');}
+function delAdmin(i){if(S.curRole!=='superadmin'){toast('Réservé au Super Admin','e');return;}const a=S.admins[i];if(a.user==='bilal'){toast('Impossible de supprimer le Super Admin principal','e');return;}showDlg('Supprimer utilisateur',`Supprimer <strong>${a.user}</strong> ?`,()=>{S.admins.splice(i,1);saveState();buildAdminList();toast('Utilisateur supprimé','w');});}
 
 function renderFiles(){
   const mz=document.getElementById('master-zone');if(!mz)return;
@@ -2440,6 +2507,71 @@ function savePcRec(){
   if(S.piecesFile)S.piecesFile.rows=S.pieces.length;
   saveState();cancelPcForm();buildPieces();
 }
+
+
+/* ═══ PASSWORD MANAGEMENT ═══ */
+let _resetPwIdx=null;
+
+function openResetPw(i){
+  if(S.curRole!=='superadmin'){toast('Réservé au Super Admin','e');return;}
+  _resetPwIdx=i;
+  const a=S.admins[i];
+  document.getElementById('reset-pw-title').textContent='Réinitialiser : '+a.user;
+  document.getElementById('reset-pw-input').value='';
+  document.getElementById('reset-pw-zone').style.display='block';
+  document.getElementById('reset-pw-input').focus();
+}
+
+function confirmResetPw(){
+  if(_resetPwIdx===null)return;
+  const newPw=document.getElementById('reset-pw-input').value.trim();
+  if(!newPw||newPw.length<4){toast('Mot de passe trop court (min 4 caractères)','w');return;}
+  S.admins[_resetPwIdx].pass=newPw;
+  saveState();buildAdminList();cancelResetPw();
+  toast('Mot de passe de '+S.admins[_resetPwIdx].user+' réinitialisé','s');
+}
+
+function cancelResetPw(){
+  _resetPwIdx=null;
+  document.getElementById('reset-pw-zone').style.display='none';
+}
+
+function buildProfile(){
+  const usr=S.admins.find(a=>a.user.toLowerCase()===S.curUser.toLowerCase());
+  document.getElementById('profile-avatar').textContent=S.curUser?S.curUser[0].toUpperCase():'?';
+  document.getElementById('profile-name').textContent=S.curUser||'—';
+  const roleLabels={superadmin:'Super Admin — Accès total',admin:'Admin — Lecture & Écriture',visitor:'Visiteur — Lecture seule (CAO)'};
+  document.getElementById('profile-role').textContent=usr?roleLabels[usr.role]||usr.role:'—';
+  document.getElementById('profile-access').textContent=S.isAdmin?'🟢 Accès complet':'🔵 Accès lecture seule';
+  document.getElementById('profile-sub').textContent='— '+S.curUser;
+  // Reset form
+  ['pw-current','pw-new','pw-confirm'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('pw-err').style.display='none';
+  document.getElementById('pw-ok').style.display='none';
+}
+
+function changeMyPassword(){
+  const cur=document.getElementById('pw-current').value;
+  const newPw=document.getElementById('pw-new').value;
+  const conf=document.getElementById('pw-confirm').value;
+  const errEl=document.getElementById('pw-err');
+  const okEl=document.getElementById('pw-ok');
+  errEl.style.display='none';okEl.style.display='none';
+
+  const usr=S.admins.find(a=>a.user.toLowerCase()===S.curUser.toLowerCase());
+  if(!usr){errEl.textContent='⚠ Compte introuvable.';errEl.style.display='flex';return;}
+  if(cur!==usr.pass){errEl.textContent='⚠ Mot de passe actuel incorrect.';errEl.style.display='flex';return;}
+  if(!newPw||newPw.length<4){errEl.textContent='⚠ Le nouveau mot de passe doit contenir au moins 4 caractères.';errEl.style.display='flex';return;}
+  if(newPw!==conf){errEl.textContent='⚠ Les deux mots de passe ne correspondent pas.';errEl.style.display='flex';return;}
+  if(newPw===cur){errEl.textContent='⚠ Le nouveau mot de passe doit être différent de l\'actuel.';errEl.style.display='flex';return;}
+
+  usr.pass=newPw;
+  saveState();
+  ['pw-current','pw-new','pw-confirm'].forEach(id=>document.getElementById(id).value='');
+  okEl.style.display='flex';
+  toast('Mot de passe modifié avec succès','s');
+}
+
 function togglePcCols(){
   const tbl=document.getElementById('pc-table');
   tbl.dataset.showAll=tbl.dataset.showAll==='1'?'0':'1';
