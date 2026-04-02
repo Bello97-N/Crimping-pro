@@ -822,6 +822,59 @@ tr.sel .fix-col{background:#eef2ff!important}
   body,html,#app,#screens,.scr.on,.lay,.cnt,.cb{overflow:visible!important;height:auto!important;background:#fff!important}
   .a4p{transform:none!important;box-shadow:none!important;width:210mm!important;min-height:297mm!important}
 }
+
+/* ══════════════════════════════════════════
+   NEW ERP MODULES — MACHINES, PLANNING, QR, STANDARDS
+══════════════════════════════════════════ */
+.hc-machines{border-left:4px solid #e74c3c!important}
+.hc-machines:hover{box-shadow:0 6px 20px rgba(231,76,60,.15)!important}
+.hc-planning{border-left:4px solid #9b59b6!important}
+.hc-planning:hover{box-shadow:0 6px 20px rgba(155,89,182,.15)!important}
+.hc-qrcode{border-left:4px solid #1abc9c!important}
+.hc-qrcode:hover{box-shadow:0 6px 20px rgba(26,188,156,.15)!important}
+.hc-standards{border-left:4px solid #f39c12!important}
+.hc-standards:hover{box-shadow:0 6px 20px rgba(243,156,18,.15)!important}
+.mach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.mach-card{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r2);padding:16px;cursor:pointer;transition:all var(--tr);position:relative;overflow:hidden}
+.mach-card:hover{box-shadow:var(--shadow2);transform:translateY(-2px)}
+.mach-card.sel{border-color:var(--leoni-blue);box-shadow:0 0 0 3px rgba(10,61,145,.1)}
+.mc-bar{height:4px;background:var(--surf3);border-radius:2px;margin:8px 0 6px;overflow:hidden}
+.mc-bar-fill{height:100%;border-radius:2px;transition:width .8s ease}
+.mc-meta{display:flex;justify-content:space-between;font-size:.7rem;color:var(--t3)}
+.mc-detail{margin-top:12px;padding-top:10px;border-top:1px solid var(--bd);display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:.72rem}
+.mc-detail span:nth-child(odd){color:var(--t3)}
+.mc-detail span:nth-child(even){color:var(--tx);font-weight:500}
+.mach-status{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:12px;font-size:.68rem;font-weight:600}
+.ms-run{background:var(--green-bg);color:var(--green)}.ms-warn{background:var(--orange-bg);color:var(--orange)}.ms-stop{background:var(--red-bg);color:var(--red)}
+.ms-dot{width:6px;height:6px;border-radius:50%}
+.ms-run .ms-dot{background:var(--green)}.ms-warn .ms-dot{background:var(--orange)}.ms-stop .ms-dot{background:var(--red)}
+.health-gauge{display:flex;flex-direction:column;align-items:center;gap:6px}
+.hg-label{font-size:.68rem;color:var(--t3);letter-spacing:1px;text-transform:uppercase;font-weight:600}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cal-head{padding:6px 4px;text-align:center;color:var(--t3);font-size:.68rem;font-weight:700;letter-spacing:.5px}
+.cal-cell{min-height:44px;padding:5px;border-radius:var(--r);background:var(--surf2);border:1px solid var(--bd);font-size:.72rem;color:var(--t2)}
+.cal-cell.today{background:var(--blue-bg);border-color:var(--blue)}
+.cal-cell.today .cal-day{color:var(--blue);font-weight:700}
+.cal-cell.empty{background:transparent;border:none}
+.cal-dots{display:flex;gap:2px;margin-top:2px;flex-wrap:wrap}
+.cal-dot{width:6px;height:6px;border-radius:50%}
+.task-card{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r2);padding:14px;margin-bottom:8px}
+.task-card.tc-u{border-left:3px solid var(--red)}.task-card.tc-l{border-left:3px solid var(--orange)}.task-card.tc-o{border-left:3px solid var(--blue)}
+.sign-btn{padding:4px 12px;border-radius:var(--r);border:1px solid var(--bd);background:var(--surf2);color:var(--t2);font-size:.7rem;cursor:pointer;font-family:var(--font);font-weight:600;transition:all var(--tr)}
+.sign-btn.signed{background:var(--green-bg);color:var(--green);border-color:#a7f3d0}
+.sign-btn:hover{background:var(--blue-bg);color:var(--blue)}
+.qr-gen{display:flex;gap:20px;flex-wrap:wrap}
+.qr-panel{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r2);padding:20px;flex:1;min-width:280px}
+.qr-canvas{background:#fff;padding:8px;border-radius:6px;display:inline-block;border:1px solid var(--bd)}
+.qr-machines-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+.qr-mini{background:var(--surf2);border-radius:var(--r);padding:10px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;border:1px solid var(--bd);transition:all var(--tr)}
+.qr-mini:hover,.qr-mini.sel{border-color:var(--leoni-blue);background:var(--blue-bg)}
+.std-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.std-card{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r2);padding:16px;display:flex;gap:12px;align-items:flex-start}
+.std-ico{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem}
+.std-actions{display:flex;gap:6px;margin-top:10px}
+.std-actions .btn{flex:1}
+@media(max-width:768px){.mach-grid{grid-template-columns:1fr}.qr-gen{flex-direction:column}.std-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -899,6 +952,30 @@ tr.sel .fix-col{background:#eef2ff!important}
           <div class="hub-cname">Administration</div>
           <div class="hub-cdesc">Tableau de bord d'administration — gestion des utilisateurs, rôles, permissions et sécurité</div>
           <span class="hub-cbadge" style="background:#fef3c7;color:#92400e">🔑 Utilisateurs · 🛡 Rôles · 🔒 Permissions</span>
+        </div>
+        <div class="hub-card hc-machines" onclick="enterModule('machines')">
+          <div class="hub-ico">🏭</div>
+          <div class="hub-cname">Machines</div>
+          <div class="hub-cdesc">Gestion du parc machines — Coupe, Préparation, santé, MTTR et maintenance</div>
+          <span class="hub-cbadge" style="background:#fef2f2;color:#991b1b">🔧 Santé · ⏱ MTTR · 📊 Zones</span>
+        </div>
+        <div class="hub-card hc-planning" onclick="enterModule('planning')">
+          <div class="hub-ico">📅</div>
+          <div class="hub-cname">Planning Préventif</div>
+          <div class="hub-cdesc">Calendrier interactif des tâches de maintenance préventive avec signature numérique</div>
+          <span class="hub-cbadge" style="background:#f5f3ff;color:#5b21b6">📅 Calendrier · ✍ Signature · ⏰ Alertes</span>
+        </div>
+        <div class="hub-card hc-qrcode" onclick="enterModule('qrcode')">
+          <div class="hub-ico">📱</div>
+          <div class="hub-cname">QR Code</div>
+          <div class="hub-cdesc">Génération de codes QR pour chaque machine et pièce de rechange</div>
+          <span class="hub-cbadge" style="background:#ecfdf5;color:#065f46">📱 Générer · 🖨 Imprimer</span>
+        </div>
+        <div class="hub-card hc-standards" onclick="enterModule('standards')">
+          <div class="hub-ico">📚</div>
+          <div class="hub-cname">Standard Library</div>
+          <div class="hub-cdesc">Documents standards LEONI — PDF, images et procédures qualité</div>
+          <span class="hub-cbadge" style="background:#fffbeb;color:#92400e">📄 PDF · 🖼 Images · 📋 Procédures</span>
         </div>
       </div>
     </div>
@@ -1843,6 +1920,154 @@ tr.sel .fix-col{background:#eef2ff!important}
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═════ MACHINES — MODULE ═════ -->
+<div class="scr" id="smach">
+  <div class="lay">
+    <div class="sidebar">
+      <div class="sb-logo-zone"><div class="sb-logo-dot" style="background:#e74c3c"></div><div class="sb-logo-name" style="color:#e74c3c">Machines</div></div>
+      <div class="sb-sec">
+        <div class="sb-lbl">Module</div>
+        <div class="ni" onclick="enterModule('hub')" style="color:var(--t3)"><span class="ico">↩</span>Retour Hub</div>
+        <div class="ni on" id="mn-dash" onclick="machNav('dash')"><span class="ico">📊</span>Vue d'ensemble</div>
+        <div class="ni" id="mn-list" onclick="machNav('list')"><span class="ico">🔧</span>Parc Machines</div>
+      </div>
+      <div class="sb-foot">
+        <div class="sb-kpis" style="grid-template-columns:1fr 1fr">
+          <div class="skpi"><div class="sv" id="mach-sb1" style="color:#059669">—</div><div class="sl2">En marche</div></div>
+          <div class="skpi"><div class="sv" id="mach-sb2" style="color:#dc2626">—</div><div class="sl2">Alertes</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="cnt">
+      <div class="ch">
+        <span class="ct" style="color:#e74c3c">🏭 Machines</span>
+        <span class="cs" id="mach-page-lbl">— Vue d'ensemble</span>
+        <div class="ca"><button class="btn btn-sm" onclick="buildMachDash()">↻ Actualiser</button></div>
+      </div>
+      <div class="cb">
+        <div id="mach-dash-view">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:16px">
+            <div class="kpi"><div class="kpi-left" style="border-color:#3b82f6"><div class="kl">Total Machines</div><div class="kv" id="mk1">8</div></div></div>
+            <div class="kpi"><div class="kpi-left" style="border-color:#059669"><div class="kl">En Marche</div><div class="kv" id="mk2" style="color:#059669">—</div></div></div>
+            <div class="kpi"><div class="kpi-left" style="border-color:#d97706"><div class="kl">MTTR Moyen</div><div class="kv" id="mk3" style="color:#d97706">—</div></div></div>
+            <div class="kpi"><div class="kpi-left" style="border-color:#dc2626"><div class="kl">Arrêts</div><div class="kv" id="mk4" style="color:#dc2626">—</div></div></div>
+          </div>
+          <div class="sec" style="margin-bottom:16px">
+            <div class="sec-title"><div class="sec-ico" style="background:#fef2f2">🏭</div>Santé par Zone</div>
+            <div id="zone-health" style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;padding:12px 0"></div>
+          </div>
+          <div class="sec">
+            <div class="sec-title"><div class="sec-ico" style="background:#eff6ff">⏱</div>MTTR par Machine (heures)</div>
+            <div id="mttr-bars" style="display:flex;align-items:flex-end;gap:8px;height:130px;padding:10px"></div>
+          </div>
+        </div>
+        <div id="mach-list-view" style="display:none">
+          <div style="margin-bottom:12px"><input class="fi" id="mach-search" placeholder="🔍 Rechercher une machine..." oninput="filterMachines()" style="max-width:320px"></div>
+          <div class="mach-grid" id="mach-cards"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════ PLANNING PRÉVENTIF — MODULE ═════ -->
+<div class="scr" id="splan">
+  <div class="lay">
+    <div class="sidebar">
+      <div class="sb-logo-zone"><div class="sb-logo-dot" style="background:#9b59b6"></div><div class="sb-logo-name" style="color:#9b59b6">Préventif</div></div>
+      <div class="sb-sec">
+        <div class="sb-lbl">Module</div>
+        <div class="ni" onclick="enterModule('hub')" style="color:var(--t3)"><span class="ico">↩</span>Retour Hub</div>
+        <div class="ni on" id="pln-cal" onclick="planNav('cal')"><span class="ico">📅</span>Calendrier</div>
+        <div class="ni" id="pln-tasks" onclick="planNav('tasks')"><span class="ico">📋</span>Tâches</div>
+      </div>
+    </div>
+    <div class="cnt">
+      <div class="ch">
+        <span class="ct" style="color:#9b59b6">📅 Planning Préventif</span>
+        <span class="cs" id="plan-page-lbl">— Calendrier</span>
+        <div class="ca">
+          <button class="btn btn-sm" onclick="planChangeMonth(-1)">◀</button>
+          <span id="plan-month-lbl" style="font-weight:600;min-width:150px;text-align:center;font-size:.85rem"></span>
+          <button class="btn btn-sm" onclick="planChangeMonth(1)">▶</button>
+        </div>
+      </div>
+      <div class="cb">
+        <div id="plan-cal-view">
+          <div class="cal-grid" id="plan-cal-head"></div>
+          <div class="cal-grid" id="plan-cal-body" style="margin-top:2px"></div>
+          <div style="display:flex;gap:14px;margin-top:12px;justify-content:center;font-size:.72rem;color:var(--t3)">
+            <span style="display:flex;align-items:center;gap:4px"><span class="cal-dot" style="background:var(--blue)"></span> Planifié</span>
+            <span style="display:flex;align-items:center;gap:4px"><span class="cal-dot" style="background:var(--orange)"></span> En retard</span>
+            <span style="display:flex;align-items:center;gap:4px"><span class="cal-dot" style="background:var(--red)"></span> Urgent</span>
+          </div>
+        </div>
+        <div id="plan-tasks-view" style="display:none"><div id="plan-task-list"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════ QR CODE — MODULE ═════ -->
+<div class="scr" id="sqr">
+  <div class="lay">
+    <div class="sidebar">
+      <div class="sb-logo-zone"><div class="sb-logo-dot" style="background:#1abc9c"></div><div class="sb-logo-name" style="color:#1abc9c">QR Code</div></div>
+      <div class="sb-sec">
+        <div class="sb-lbl">Module</div>
+        <div class="ni" onclick="enterModule('hub')" style="color:var(--t3)"><span class="ico">↩</span>Retour Hub</div>
+        <div class="ni on"><span class="ico">📱</span>Générateur</div>
+      </div>
+    </div>
+    <div class="cnt">
+      <div class="ch">
+        <span class="ct" style="color:#1abc9c">📱 Générateur QR Code</span>
+        <span class="cs">— Pour chaque pièce et machine</span>
+      </div>
+      <div class="cb">
+        <div class="qr-gen">
+          <div class="qr-panel" style="text-align:center">
+            <h3 style="font-size:.85rem;font-weight:600;color:var(--tx);margin-bottom:14px">Générer un QR Code</h3>
+            <input class="fi" id="qr-input" value="LEONI-M-001" oninput="genQR()" style="text-align:center;max-width:250px;margin:0 auto 14px;display:block">
+            <div class="qr-canvas" id="qr-canvas"></div>
+            <div style="font-family:monospace;font-size:.82rem;font-weight:600;color:var(--leoni-blue);margin-top:10px" id="qr-lbl">LEONI-M-001</div>
+            <button class="btn btn-p" style="margin-top:12px" onclick="printQR()">🖨 Imprimer</button>
+          </div>
+          <div class="qr-panel" style="flex:2">
+            <h3 style="font-size:.85rem;font-weight:600;color:var(--tx);margin-bottom:14px">QR Codes Machines</h3>
+            <div class="qr-machines-grid" id="qr-mach-grid"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═════ STANDARD LIBRARY — MODULE ═════ -->
+<div class="scr" id="sstd">
+  <div class="lay">
+    <div class="sidebar">
+      <div class="sb-logo-zone"><div class="sb-logo-dot" style="background:#f39c12"></div><div class="sb-logo-name" style="color:#f39c12">Standards</div></div>
+      <div class="sb-sec">
+        <div class="sb-lbl">Module</div>
+        <div class="ni" onclick="enterModule('hub')" style="color:var(--t3)"><span class="ico">↩</span>Retour Hub</div>
+        <div class="ni on"><span class="ico">📚</span>Bibliothèque</div>
+      </div>
+    </div>
+    <div class="cnt">
+      <div class="ch">
+        <span class="ct" style="color:#f39c12">📚 Standard Library</span>
+        <span class="cs">— Documents PDF/Images des standards LEONI</span>
+        <div class="ca"><button class="btn btn-p btn-sm adm-only" style="display:none" onclick="toast('Upload bientôt disponible','i')">+ Ajouter</button></div>
+      </div>
+      <div class="cb">
+        <div class="std-grid" id="std-grid"></div>
       </div>
     </div>
   </div>
@@ -2932,17 +3157,16 @@ function goToHub(){
   if(crimpCard)crimpCard.style.display=mods.crimping?'block':'none';
   if(kjCard)kjCard.style.display=mods.kitjoint?'block':'none';
   if(adminCard)adminCard.style.display=(mods.admin&&S.curRole==='superadmin')?'block':'none';
+  // New modules — visible to all logged-in users
+  ['hc-machines','hc-planning','hc-qrcode'].forEach(cls=>{const c=document.querySelector('.'+cls);if(c)c.style.display=S.curUser?'block':'none';});
+  const stdCard=document.querySelector('.hc-standards');
+  if(stdCard)stdCard.style.display=(S.isAdmin||S.curRole==='superadmin')?'block':'none';
 
   // Adjust grid columns
-  const visible=[mods.crimping,mods.kitjoint,(mods.admin&&S.curRole==='superadmin')].filter(Boolean).length;
+  const allCards=document.querySelectorAll('#hub-cards-grid .hub-card');
+  const visible=[...allCards].filter(c=>c.style.display!=='none').length;
   const grid=document.getElementById('hub-cards-grid');
-  if(grid)grid.style.gridTemplateColumns=visible<=1?'1fr':visible===2?'1fr 1fr':'1fr 1fr 1fr';
-
-  // If only 1 module visible, enter it directly
-  if(visible===1){
-    if(mods.crimping)enterModule('crimping');
-    else if(mods.kitjoint)enterModule('kitjoint');
-  }
+  if(grid)grid.style.gridTemplateColumns=visible<=2?'1fr 1fr':'repeat(3,1fr)';
 }
 
 function enterModule(mod){
@@ -2967,6 +3191,27 @@ function enterModule(mod){
     document.getElementById('sad').classList.add('on');
     document.getElementById('scr-lbl').textContent='ADMINISTRATION';
     adNav('au');
+  }else if(mod==='machines'){
+    document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
+    document.getElementById('smach').classList.add('on');
+    document.getElementById('scr-lbl').textContent='MACHINES';
+    machNav('dash');
+  }else if(mod==='planning'){
+    document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
+    document.getElementById('splan').classList.add('on');
+    document.getElementById('scr-lbl').textContent='PLANNING PRÉVENTIF';
+    planNav('cal');
+  }else if(mod==='qrcode'){
+    document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
+    document.getElementById('sqr').classList.add('on');
+    document.getElementById('scr-lbl').textContent='QR CODE';
+    genQR();buildQRGrid();
+  }else if(mod==='standards'){
+    document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
+    document.getElementById('sstd').classList.add('on');
+    document.getElementById('scr-lbl').textContent='STANDARD LIBRARY';
+    if(S.isAdmin)document.querySelectorAll('#sstd .adm-only').forEach(e=>e.style.display='flex');
+    buildStdGrid();
   }else if(mod==='hub'){
     goToHub();
   }
@@ -3305,6 +3550,160 @@ function togglePcCols(){
   const tbl=document.getElementById('pc-table');
   tbl.dataset.showAll=tbl.dataset.showAll==='1'?'0':'1';
   buildPieces();
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   NEW ERP MODULES JS — MACHINES, PLANNING, QR CODE, STANDARDS
+   ⚠ PASSWORDS ARE NEVER MODIFIED BY THIS CODE ⚠
+═══════════════════════════════════════════════════════════════ */
+const MACHINES=[
+  {id:'M-001',name:'Komax Alpha 477',zone:'Coupe',status:'running',health:92,mttr:1.2,lastMaint:'2026-03-15',nextMaint:'2026-04-15',project:'BMW F45'},
+  {id:'M-002',name:'Schleuniger ES9320',zone:'Coupe',status:'warning',health:68,mttr:2.8,lastMaint:'2026-02-20',nextMaint:'2026-04-05',project:'PSA W12'},
+  {id:'M-003',name:'Komax Zeta 640',zone:'Coupe',status:'running',health:95,mttr:0.8,lastMaint:'2026-03-28',nextMaint:'2026-04-28',project:'VW MQB'},
+  {id:'M-004',name:'TE Applicator AMP',zone:'Préparation',status:'stopped',health:34,mttr:5.1,lastMaint:'2026-01-10',nextMaint:'2026-04-02',project:'BMW F45'},
+  {id:'M-005',name:'Schleuniger PF2000',zone:'Préparation',status:'running',health:88,mttr:1.5,lastMaint:'2026-03-20',nextMaint:'2026-04-20',project:'PSA W12'},
+  {id:'M-006',name:'Crimping Press CP-1',zone:'Crimping',status:'running',health:91,mttr:1.1,lastMaint:'2026-03-25',nextMaint:'2026-04-25',project:'VW MQB'},
+  {id:'M-007',name:'Crimping Press CP-2',zone:'Crimping',status:'warning',health:55,mttr:3.4,lastMaint:'2026-02-15',nextMaint:'2026-04-03',project:'BMW F45'},
+  {id:'M-008',name:'Seal Insertion SI-01',zone:'Kit Joint',status:'running',health:82,mttr:1.8,lastMaint:'2026-03-10',nextMaint:'2026-04-10',project:'PSA W12'}
+];
+const PREV_TASKS=[
+  {id:'PT-001',machId:'M-001',task:'Lubrification lames',freq:'Hebdo',nextDate:'2026-04-07',assignee:'Said',status:'planifié',signed:false},
+  {id:'PT-002',machId:'M-002',task:'Calibration capteurs',freq:'Mensuel',nextDate:'2026-04-05',assignee:'Loukrimi',status:'en_retard',signed:false},
+  {id:'PT-003',machId:'M-004',task:'Remplacement courroie',freq:'Trimestriel',nextDate:'2026-04-02',assignee:'Said',status:'urgent',signed:false},
+  {id:'PT-004',machId:'M-006',task:'Vérification couple sertissage',freq:'Hebdo',nextDate:'2026-04-08',assignee:'Dahbi',status:'planifié',signed:false},
+  {id:'PT-005',machId:'M-008',task:'Nettoyage station joints',freq:'Quotidien',nextDate:'2026-04-03',assignee:'Oumjoud',status:'planifié',signed:false},
+  {id:'PT-006',machId:'M-003',task:'Inspection lames de coupe',freq:'Mensuel',nextDate:'2026-04-12',assignee:'Loukrimi',status:'planifié',signed:false},
+  {id:'PT-007',machId:'M-007',task:'Remplacement poinçon usé',freq:'Trimestriel',nextDate:'2026-04-04',assignee:'Dahbi',status:'urgent',signed:false}
+];
+const STANDARDS_DATA=[
+  {id:'STD-001',title:'Standard Sertissage LEONI V3.2',type:'PDF',cat:'Crimping',date:'2025-11-15'},
+  {id:'STD-002',title:'Procédure Maintenance Préventive',type:'PDF',cat:'Maintenance',date:'2025-09-01'},
+  {id:'STD-003',title:'Inspection Visuelle Joints',type:'Image',cat:'Kit Joint',date:'2026-01-20'},
+  {id:'STD-004',title:'Calibration Outils Coupe',type:'PDF',cat:'Coupe',date:'2025-12-10'},
+  {id:'STD-005',title:'Normes Qualité Câblage LEONI',type:'PDF',cat:'Qualité',date:'2026-02-28'}
+];
+let planMonth=new Date().getMonth(),planYear=new Date().getFullYear(),selMach=null;
+
+function machNav(p){
+  document.getElementById('mach-dash-view').style.display=p==='dash'?'block':'none';
+  document.getElementById('mach-list-view').style.display=p==='list'?'block':'none';
+  document.querySelectorAll('[id^="mn-"]').forEach(n=>n.classList.remove('on'));
+  var el=document.getElementById('mn-'+p);if(el)el.classList.add('on');
+  document.getElementById('mach-page-lbl').textContent=p==='dash'?'— Vue d\'ensemble':'— Parc Machines';
+  if(p==='dash')buildMachDash();else buildMachCards();
+}
+function buildMachDash(){
+  var run=MACHINES.filter(m=>m.status==='running').length;
+  var stop=MACHINES.filter(m=>m.status==='stopped').length;
+  var avg=(MACHINES.reduce((s,m)=>s+m.mttr,0)/MACHINES.length).toFixed(1);
+  document.getElementById('mk1').textContent=MACHINES.length;
+  document.getElementById('mk2').textContent=run;
+  document.getElementById('mk3').textContent=avg+'h';
+  document.getElementById('mk4').textContent=stop;
+  document.getElementById('mach-sb1').textContent=run;
+  document.getElementById('mach-sb2').textContent=MACHINES.filter(m=>m.status!=='running').length;
+  var zones=['Coupe','Préparation','Crimping','Kit Joint'];
+  document.getElementById('zone-health').innerHTML=zones.map(function(z){
+    var zm=MACHINES.filter(m=>m.zone===z);
+    var a=zm.length?Math.round(zm.reduce((s,m)=>s+m.health,0)/zm.length):0;
+    var c=a>=80?'#059669':a>=50?'#d97706':'#dc2626';
+    var circ=Math.round(2*Math.PI*52);
+    var off=Math.round((1-a/100)*circ);
+    return '<div class="health-gauge"><svg width="80" height="80" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#eef1f6" stroke-width="8"/><circle cx="60" cy="60" r="52" fill="none" stroke="'+c+'" stroke-width="8" stroke-dasharray="'+circ+'" stroke-dashoffset="'+off+'" stroke-linecap="round" transform="rotate(-90 60 60)" style="transition:stroke-dashoffset 1s"/><text x="60" y="58" text-anchor="middle" fill="'+c+'" font-size="22" font-weight="800" font-family="monospace">'+a+'</text><text x="60" y="74" text-anchor="middle" fill="#8896ab" font-size="9">SCORE</text></svg><span class="hg-label">'+z+'</span></div>';
+  }).join('');
+  document.getElementById('mttr-bars').innerHTML=MACHINES.map(function(m){
+    var pct=Math.min(m.mttr/6*100,100);
+    var c=m.mttr>3?'#dc2626':m.mttr>2?'#d97706':'#059669';
+    return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%"><span style="font-size:.7rem;font-weight:600;color:var(--t2)">'+m.mttr+'h</span><div style="flex:1;width:100%;max-width:30px;background:var(--surf3);border-radius:4px 4px 0 0;position:relative;overflow:hidden"><div style="position:absolute;bottom:0;width:100%;height:'+pct+'%;background:'+c+';border-radius:4px 4px 0 0;transition:height .8s"></div></div><span style="font-size:.6rem;color:var(--t3);white-space:nowrap">'+m.id+'</span></div>';
+  }).join('');
+}
+function buildMachCards(){
+  var q=(document.getElementById('mach-search').value||'').toLowerCase();
+  var list=MACHINES.filter(m=>!q||m.name.toLowerCase().includes(q)||m.id.toLowerCase().includes(q)||m.zone.toLowerCase().includes(q));
+  document.getElementById('mach-cards').innerHTML=list.map(function(m){
+    var sc=m.status==='running'?'ms-run':m.status==='warning'?'ms-warn':'ms-stop';
+    var sl=m.status==='running'?'En marche':m.status==='warning'?'Attention':'Arrêt';
+    var col=m.health>=80?'#059669':m.health>=50?'#d97706':'#dc2626';
+    var isSel=selMach===m.id;
+    return '<div class="mach-card'+(isSel?' sel':'')+'" onclick="toggleMach(\''+m.id+'\')"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px"><div><div style="font-size:.92rem;font-weight:600;color:var(--tx)">'+m.name+'</div><div style="font-size:.72rem;color:var(--t3);font-family:monospace;margin-top:2px">'+m.id+' · '+m.zone+'</div></div><span class="mach-status '+sc+'"><span class="ms-dot"></span>'+sl+'</span></div><div style="display:flex;justify-content:space-between;font-size:.7rem;margin-bottom:4px"><span style="color:var(--t3)">Santé</span><span style="color:'+col+';font-weight:700;font-family:monospace">'+m.health+'%</span></div><div class="mc-bar"><div class="mc-bar-fill" style="width:'+m.health+'%;background:'+col+'"></div></div><div class="mc-meta"><span>MTTR: <strong>'+m.mttr+'h</strong></span><span style="color:var(--leoni-blue)">'+m.project+'</span></div>'+(isSel?'<div class="mc-detail"><span>Dernière maint:</span><span>'+m.lastMaint+'</span><span>Prochaine:</span><span style="color:var(--orange)">'+m.nextMaint+'</span></div>':'')+'</div>';
+  }).join('');
+}
+function toggleMach(id){selMach=selMach===id?null:id;buildMachCards();}
+function filterMachines(){buildMachCards();}
+
+function planNav(p){
+  document.getElementById('plan-cal-view').style.display=p==='cal'?'block':'none';
+  document.getElementById('plan-tasks-view').style.display=p==='tasks'?'block':'none';
+  document.querySelectorAll('[id^="pln-"]').forEach(n=>n.classList.remove('on'));
+  var el=document.getElementById('pln-'+p);if(el)el.classList.add('on');
+  document.getElementById('plan-page-lbl').textContent=p==='cal'?'— Calendrier':'— Tâches';
+  if(p==='cal')buildCalendar();else buildTaskList();
+}
+function planChangeMonth(d){planMonth+=d;if(planMonth>11){planMonth=0;planYear++;}if(planMonth<0){planMonth=11;planYear--;}buildCalendar();}
+function buildCalendar(){
+  var mn=new Date(planYear,planMonth).toLocaleDateString('fr-FR',{month:'long',year:'numeric'});
+  document.getElementById('plan-month-lbl').textContent=mn.charAt(0).toUpperCase()+mn.slice(1);
+  document.getElementById('plan-cal-head').innerHTML=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'].map(function(d){return '<div class="cal-head">'+d+'</div>';}).join('');
+  var dim=new Date(planYear,planMonth+1,0).getDate();
+  var fd=new Date(planYear,planMonth,1).getDay();fd=fd===0?6:fd-1;
+  var now=new Date();var isThisM=now.getFullYear()===planYear&&now.getMonth()===planMonth;var td=now.getDate();
+  var cells='';
+  for(var i=0;i<fd;i++)cells+='<div class="cal-cell empty"></div>';
+  for(var d=1;d<=dim;d++){
+    var ds=planYear+'-'+String(planMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    var dt=PREV_TASKS.filter(function(t){return t.nextDate===ds;});
+    var isT=isThisM&&d===td;
+    cells+='<div class="cal-cell'+(isT?' today':'')+'"><span class="cal-day">'+d+'</span>';
+    if(dt.length)cells+='<div class="cal-dots">'+dt.map(function(t){return '<span class="cal-dot" style="background:'+(t.status==='urgent'?'var(--red)':t.status==='en_retard'?'var(--orange)':'var(--blue)')+'"></span>';}).join('')+'</div>';
+    cells+='</div>';
+  }
+  document.getElementById('plan-cal-body').innerHTML=cells;
+}
+function buildTaskList(){
+  document.getElementById('plan-task-list').innerHTML=PREV_TASKS.map(function(t){
+    var m=MACHINES.find(function(x){return x.id===t.machId;});
+    var cls=t.status==='urgent'?'tc-u':t.status==='en_retard'?'tc-l':'tc-o';
+    var sl=t.status==='urgent'?'Urgent':t.status==='en_retard'?'En retard':'Planifié';
+    var sc=t.status==='urgent'?'var(--red)':t.status==='en_retard'?'var(--orange)':'var(--blue)';
+    var bg=t.status==='urgent'?'var(--red-bg)':t.status==='en_retard'?'var(--orange-bg)':'var(--blue-bg)';
+    return '<div class="task-card '+cls+'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px"><div><div style="font-size:.85rem;font-weight:600;color:var(--tx)">'+t.task+'</div><div style="font-size:.72rem;color:var(--t3);margin-top:2px">'+(m?m.name:'')+' · '+t.freq+'</div></div><span class="mach-status" style="background:'+bg+';color:'+sc+'"><span class="ms-dot" style="background:'+sc+'"></span>'+sl+'</span></div><div style="display:flex;justify-content:space-between;align-items:center;font-size:.72rem"><div><span style="color:var(--t3)">Date: </span><span style="font-family:monospace;color:var(--leoni-blue)">'+t.nextDate+'</span><span style="color:var(--t3);margin-left:10px">Assigné: </span><span>'+t.assignee+'</span></div><button class="sign-btn'+(t.signed?' signed':'')+'" onclick="signTask(\''+t.id+'\')">'+(t.signed?'✓ Signé':'✍ Signer')+'</button></div></div>';
+  }).join('');
+}
+function signTask(id){var t=PREV_TASKS.find(function(x){return x.id===id;});if(t){t.signed=!t.signed;buildTaskList();toast(t.signed?'Tâche signée ✓':'Signature retirée','s');}}
+
+function genQR(){
+  var v=(document.getElementById('qr-input').value||'LEONI').trim();
+  document.getElementById('qr-lbl').textContent=v;
+  var sz=21,px=Math.floor(140/sz);
+  var hash=0;for(var c=0;c<v.length;c++)hash=((hash<<5)-hash+v.charCodeAt(c))|0;
+  var grid=[];for(var i=0;i<sz;i++){grid[i]=[];for(var j=0;j<sz;j++)grid[i][j]=false;}
+  for(var i=0;i<7;i++)for(var j=0;j<7;j++){var fill=i===0||i===6||j===0||j===6||(i>=2&&i<=4&&j>=2&&j<=4);grid[i][j]=fill;grid[i][sz-1-j]=fill;grid[sz-1-i][j]=fill;}
+  for(var i=8;i<sz-8;i++)for(var j=8;j<sz;j++){var seed=(hash*(i+1)*(j+1))&0xffff;grid[i][j]=seed%3!==0;}
+  for(var i=0;i<8;i++)for(var j=8;j<sz-8;j++){var seed=(hash*(i+1)*(j+31))&0xffff;grid[i][j]=i>0&&seed%4!==0;}
+  var svg='<svg width="'+(sz*px)+'" height="'+(sz*px)+'" xmlns="http://www.w3.org/2000/svg">';
+  for(var i=0;i<sz;i++)for(var j=0;j<sz;j++){if(grid[i][j])svg+='<rect x="'+(j*px)+'" y="'+(i*px)+'" width="'+px+'" height="'+px+'" fill="#0a3d91"/>';}
+  svg+='</svg>';document.getElementById('qr-canvas').innerHTML=svg;
+}
+function buildQRGrid(){
+  document.getElementById('qr-mach-grid').innerHTML=MACHINES.map(function(m){
+    var sel=document.getElementById('qr-input').value===m.id;
+    return '<div class="qr-mini'+(sel?' sel':'')+'" onclick="document.getElementById(\'qr-input\').value=\''+m.id+'\';genQR();buildQRGrid()"><div style="background:#fff;padding:4px;border-radius:4px"><svg width="50" height="50" viewBox="0 0 21 21"><rect width="21" height="21" fill="#fff"/><rect x="0" y="0" width="7" height="7" fill="#0a3d91" rx="1"/><rect x="14" y="0" width="7" height="7" fill="#0a3d91" rx="1"/><rect x="0" y="14" width="7" height="7" fill="#0a3d91" rx="1"/><rect x="2" y="2" width="3" height="3" fill="#fff"/><rect x="16" y="2" width="3" height="3" fill="#fff"/><rect x="2" y="16" width="3" height="3" fill="#fff"/><rect x="3" y="3" width="1" height="1" fill="#0a3d91"/><rect x="17" y="3" width="1" height="1" fill="#0a3d91"/><rect x="3" y="17" width="1" height="1" fill="#0a3d91"/></svg></div><span style="font-family:monospace;font-size:.68rem;color:var(--leoni-blue);font-weight:600">'+m.id+'</span><span style="font-size:.6rem;color:var(--t3)">'+m.name.split(' ')[0]+'</span></div>';
+  }).join('');
+}
+function printQR(){
+  var c=document.getElementById('qr-canvas').innerHTML;
+  var l=document.getElementById('qr-lbl').textContent;
+  var w=window.open('','','width=400,height=400');
+  w.document.write('<html><head><title>QR — '+l+'<\/title><\/head><body style="text-align:center;padding:40px;font-family:sans-serif"><h2 style="color:#0a3d91">'+l+'<\/h2>'+c+'<p style="color:#888;font-size:12px">LEONI Wiring System<\/p><\/body><\/html>');
+  w.document.close();w.print();
+}
+function buildStdGrid(){
+  document.getElementById('std-grid').innerHTML=STANDARDS_DATA.map(function(d){
+    var bg=d.type==='PDF'?'#fef2f2':'#f5f3ff';
+    var ico=d.type==='PDF'?'📄':'🖼';
+    return '<div class="std-card"><div class="std-ico" style="background:'+bg+'">'+ico+'</div><div style="flex:1"><div style="font-size:.88rem;font-weight:600;color:var(--tx)">'+d.title+'</div><div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap"><span style="background:var(--blue-bg);color:var(--blue);padding:1px 8px;border-radius:4px;font-size:.68rem;font-weight:600">'+d.cat+'</span><span style="color:var(--t3);font-size:.68rem">'+d.date+'</span></div><div class="std-actions" style="margin-top:10px"><button class="btn btn-sm btn-o" style="flex:1">Voir</button><button class="btn btn-sm" style="flex:1">Télécharger</button></div></div></div>';
+  }).join('');
 }
 
 </script>
